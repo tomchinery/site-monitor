@@ -1,0 +1,27 @@
+#wrapper
+  %h3.text-center Request Logs 
+
+  %table.table.table-striped.table-condensed
+    %thead
+      %th Site Address
+      %th Request Interval
+      %th HTTP Code
+      %th HTTP Message
+      %th Response Time
+      %th Site ID
+      %th Logged on
+    - @requests.each do |req|
+      %tr
+        %td= req.url
+        %td= req.interval
+        %td= req.code
+        %td= req.message
+        %td= req.response_time
+        %td= req.site_id
+        %td= req.created_at
+  = will_paginate @requests
+  .pull-right.back 
+    = link_to 'Back', sites_path, :method => "get"
+
+
+  

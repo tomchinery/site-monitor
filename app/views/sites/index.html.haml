@@ -1,0 +1,27 @@
+#wrapper
+  %h3
+    Listing sites:
+
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th Site Address:
+      %th Interval between requests:
+      %th Monitoring:
+      %th Avg. Response Time
+      %th
+      %th
+
+
+  %tbody 
+    - @sites.each do |site|
+      %tr
+        %td= link_to "#{site.url}", site
+        %td= link_to "#{site.interval}", site
+        %td= link_to "#{site.on_off}", site
+        %td= site.average_response_time
+        %td= link_to 'Edit', edit_site_path(site)
+        %td= link_to 'Delete', site, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+= button_to 'New Site', new_site_path, :method => "get"

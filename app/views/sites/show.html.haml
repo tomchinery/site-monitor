@@ -1,0 +1,129 @@
+#wrapper
+  %h3.text-center Site Information & Statistics
+%p
+  %strong Site Address:
+  = @site.url
+%p
+  %strong Interval between responses:
+  = @site.interval 
+
+%p 
+  %strong Monitoring?
+  = @site.on_off
+%p
+  = link_to 'Edit site', edit_site_path(@site), :method => 'get'
+  
+
+.center-text
+  = radio_button_tag 'time', "3600", true
+  Past hour
+
+  = radio_button_tag 'time', "86400"
+  Past 24 hours
+
+  = radio_button_tag 'time', "604800"
+  Past 7 days
+
+  = radio_button_tag 'time', "2629743"
+  Past 4 weeks
+
+  = radio_button_tag 'time', "31556926"
+  Past year
+
+#chart_container
+  #x_axis
+  #y_axis
+  #chart
+    :javascript
+        // Initiate AJAX request 
+        var get_requests = function(period){
+          $.ajax({
+            type: "get",
+            url: '/requests/list/#{@site.id}.json?period='+period, 
+            success: function(data) {
+
+              // Get average response times depending on time period so no. of response times / the grand total
+              var actual_res_times = _.map(data, function(obj){ return parseFloat(obj.response_time) } );
+              var average_res_time = $("#average")
+              var number = 0;
+              var total = 0;  
+              $.each(actual_res_times,function() {
+                number++;
+                total += this;
+              });
+              var grand = total / number;
+
+              average_res_time.html("Average response time is <strong>" + grand.toPrecision(2) + "</strong> seconds.");
+
+              // Format the data for the graph and order by ID
+              // var order = _.map(data, function(obj) { return obj.id });
+              var response_times = _.map(data, function(obj){ return { x: parseFloat(new Date(obj.created_at).getTime() / 1000), y: parseFloat(obj.response_time) } } );
+              var response_times1 = _.map(data, function(obj){ return parseFloat(new Date(obj.created_at).getTime() / 1000) });
+
+              // Empty graph div's when new one is clicked
+              $('#chart').html(''); 
+              $('#y_axis').html('');
+              $('#x_axis').html('');
+
+          	  var graph = new Rickshaw.Graph( {
+              	element: document.querySelector("#chart"),
+            	width: 895,
+            	height: 250,
+            	renderer: 'line',
+            	interpolation: 'bundle',
+            	series: [ {
+                    color: 'steelblue',
+                    data: response_times
+            		} ]
+                });
+
+              // Y Axis
+              var y_axis = new Rickshaw.Graph.Axis.Y( {
+            		graph: graph,
+            		orientation: 'left',
+            		element: document.getElementById('y_axis'),
+              });
+
+              // X Axis
+              var time = new Rickshaw.Fixtures.Time();
+              var periodTicks = period / 60 / 60;
+
+              var periodTimeUnit; 
+              if (parseInt(period) <= 10800) { // 3 hours
+              	periodTimeUnit = time.unit('minute');
+              } else if (parseInt(period) <= 259200 ) { // 3 days
+              	periodTimeUnit = time.unit('hour');
+              } else if (parseInt(period) <= 2419200) { // 4 weeks
+              	periodTimeUnit = time.unit('day')
+              } else {
+                periodTimeUnit = time.unit(86400);
+              }
+
+              var x_ticks = new Rickshaw.Graph.Axis.Time( {
+                graph: graph,
+                tickSpacing: period / 60 / 60, // 24 hours
+                ticks: periodTicks,
+                timeUnit: periodTimeUnit
+              });
+
+              var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+                graph: graph
+              });
+
+              // Finally render the graph!
+              graph.render();  
+            }
+          }); 
+        };
+
+        $(document).ready (function() {
+          get_requests($("input[name='time']:checked").val());
+          // When button clicked display corresponding graph
+          $("input[name='time']").click(function(){
+            get_requests($(this).val());
+          });
+        });
+.pull-right
+  #average
+
+= render :template => 'requests/list'

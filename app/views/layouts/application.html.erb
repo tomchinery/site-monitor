@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PCS Site Monitor</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="navbar navbar-top"> 
+<div id="wrapper">
+  <%= link_to "Site Monitor", "/", :class => "navbar-brand" %> 
+  <!-- #  -->
+    <ul class="nav navbar-nav head-title">
+      <li><a href="/">Home</a></li>
+      <li><%= link_to "About", "/about"%></li>
+      <li><%= link_to "Support", "/support"%></li>
+    </ul>
+
+    <% if user_signed_in? %>
+      <div class="pull-right inline">
+    	  <%= button_to "Logout", destroy_user_session_path, method: :delete, :class => "btn-nav user"  %>
+      </div>
+      <div class="pull-right inline">
+    	  <%= button_to 'Edit profile', edit_user_registration_path, :method => "get", :class => "btn-nav user" %>
+      </div>
+    <% else %>
+      <div class="pull-right inline">
+        <%= button_to 'Log in', "/", :method => "get", :class => "btn-nav user" %>
+      </div>
+    <% end %> 
+  </div>
+</div>
+
+<div class="container">
+<div id="wrapper">
+    <div class="errors">
+      <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+      <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+      <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+    </div>
+		<%= yield %>
+	</div>
+</div>
+<div id="wrapper">
+<!-- <p class="pull-right"> © 2013 Your brand here.</p> -->
+</div>
+</div>
+
+
+</body>
+</html>
+

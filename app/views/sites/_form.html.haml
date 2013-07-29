@@ -1,0 +1,20 @@
+= form_for(@site) do |f| 
+  = if @site.errors.any? 
+    #error_explanation
+      %h2
+        - @site.errors.full_messages.each do |x|
+          = x 
+          %br
+
+  .field
+    = f.label "Site address:" 
+    = f.text_field :url, :size => 40 
+  .field
+    = f.label "Interval between requests" 
+    = f.text_field :interval 
+  .field
+    = f.label "Currently Monitoring?" 
+    = f.check_box  :on_off, :value => 1
+
+  .actions
+    = f.submit
