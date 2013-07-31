@@ -1,11 +1,11 @@
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!
-
+  before_action :authenticate_user!
+  before_action :restrict_sites, except: [:index, :new, :create]
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
+    @sites = current_user.sites
   end
 
   # GET /sites/1
@@ -71,6 +71,10 @@ class SitesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_site
       @site = Site.find(params[:id])
+    end
+
+    def restrict_sites
+      redirect_to :action => "index" unless @site.user == current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

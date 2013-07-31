@@ -21,3 +21,9 @@
 
 en:
   hello: "Hello world"
+
+  activerecord: 
+    attributes:
+      site:
+        url: "Site address"
+        interval: "Interval between requests"

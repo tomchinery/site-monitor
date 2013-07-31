@@ -123,6 +123,10 @@ a {
 	padding:5px;
 }
 
+.shrink {
+  width:30%;
+}
+
 .centering {
   float:none;
   margin:0 auto;
@@ -143,7 +147,7 @@ a {
     margin: 0;
   }
   h2, li {
-    color:red;
+    color:#C71E1C;
   }
   a {
     @extend .alert-message.close;

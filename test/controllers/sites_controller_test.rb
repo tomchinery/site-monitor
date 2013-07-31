@@ -2,8 +2,12 @@ require 'test_helper'
 
 class SitesControllerTest < ActionController::TestCase
   setup do
-    @site = sites(:one)
+    @site = FactoryGirl.create(:site)
+    user = FactoryGirl.create(:user)
+    sign_in user
   end
+
+  # Need to have user signed in. 
 
   test "should get index" do
     get :index
@@ -35,7 +39,7 @@ class SitesControllerTest < ActionController::TestCase
   end
 
   test "should update site" do
-    patch :update, id: @site, site: { interval: @site.interval, url: @site.url }
+    patch :update, id: @site.id, site: { interval: @site.interval, url: @site.url, id: @site.id }
     assert_redirected_to site_path(assigns(:site))
   end
 

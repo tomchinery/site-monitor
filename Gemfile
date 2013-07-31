@@ -52,6 +52,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :test do
+  gem "factory_girl_rails", "~> 4.0"
+  gem "mocha", require: false
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

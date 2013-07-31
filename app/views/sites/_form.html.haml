@@ -8,13 +8,23 @@
 
   .field
     = f.label "Site address:" 
-    = f.text_field :url, :size => 40 
+    .help-block
+      Make sure you start with 'http://' or  'https://' and that it ends with a slash '/'
+    = f.text_field :url, :size => 40, :placeholder => "http://www.example.com/"
+    / .shrink
+    /   = select_tag :http, options_for_select([["http://", "http://"], ["https://", "https://"]])
+  %br
   .field
     = f.label "Interval between requests" 
-    = f.text_field :interval 
+    .help-block
+      Intervals are done in minutes only, just as a number 
+    .input-group
+      = f.text_field :interval, :placeholder => "1"
+      %span.input-group-addon
+        Minutes
+  %br
   .field
     = f.label "Currently Monitoring?" 
     = f.check_box  :on_off, :value => 1
-
   .actions
     = f.submit

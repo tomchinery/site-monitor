@@ -1,8 +1,8 @@
 class Mailer < ActionMailer::Base
-  default from: "admin@uptime-monitor.net"
+  default from: Rails.application.config.emails_from
 
   def alert_email(request)
     @request = request
-    mail(to: @request.site.user.email, subject: 'ALERT: Your site is down')
+    mail(to: @request.site.user.email, subject: "Alert from #{Rails.application.config.app_name}")
   end
 end

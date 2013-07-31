@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 9d0b684a8c682abaeebc1093e2aecbe0094dcd5f
+  revision: e2a2673729a3989a8194689a3190c8667ffcc90c
   branch: 3.0.0
   specs:
-    anjlab-bootstrap-rails (3.0.0.0.alpha1)
+    anjlab-bootstrap-rails (3.0.0.rc1)
       railties (>= 3.0)
       sass (>= 3.2)
 
@@ -55,11 +55,16 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     haml (4.0.3)
       tilt
     hike (1.2.3)
     i18n (0.6.4)
-    jbuilder (1.4.2)
+    jbuilder (1.5.0)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
@@ -69,8 +74,11 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.23)
     minitest (4.7.5)
+    mocha (0.14.0)
+      metaclass (~> 0.0.1)
     multi_json (1.7.7)
     mysql2 (0.3.13)
     orm_adapter (0.4.0)
@@ -96,9 +104,9 @@ GEM
       json (~> 1.4)
     rickshaw_rails (1.2.0)
       railties (>= 3.1.0)
-    rufus-scheduler (2.0.22)
+    rufus-scheduler (2.0.23)
       tzinfo (>= 0.3.23)
-    sass (3.2.9)
+    sass (3.2.10)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
@@ -141,10 +149,12 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   d3_rails
   devise (~> 3.0.0)
+  factory_girl_rails (~> 4.0)
   haml (~> 4.0.3)
   jbuilder (~> 1.2)
   jquery-rails
   mail (~> 2.5.4)
+  mocha
   mysql2
   rails (= 4.0.0)
   rickshaw_rails

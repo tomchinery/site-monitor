@@ -2,10 +2,20 @@
 %html
   %head
   %body
-    %h1 Your site @request.site.url is returning an unexpected HTTP code.
+    %h3 
+      Your site 
+      = @request.site.url 
+      is returning an unexpected status.
     %p
-      HTTP Code: @request.code
-      HTTP Message: @request.message
+      Status Code: 
+      = @request.code
+      %br 
+      Status Message:
+      = @request.message
       %br
+      %p  
+        = "For more information on this status code please visit http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" + "#" + "#{@request.code}"
+      %br
+      %p
+        Email sent from Site Monitor.
     %p
-    %p If this is an accepted HTTP code please add it to the accepted list here: 
