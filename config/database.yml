@@ -35,5 +35,6 @@ production:
   database: site-monitor-01_production
   pool: 5
   username: root
-  password: l4TbnT5bn
-  socket: /tmp/mysql.sock
+  password: Timtom59
+  socket: /var/lib/mysql/mysql.soc
+  host: 127.0.0.1
