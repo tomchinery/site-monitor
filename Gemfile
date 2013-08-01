@@ -6,6 +6,9 @@ gem 'rails', '4.0.0'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
+gem "execjs"
+gem 'therubyracer'
+
 gem "rufus-scheduler", "~> 2.0.21"
 gem "mail", "~> 2.5.4"
 
