@@ -5,11 +5,16 @@ A simple rails application that monitors the response times of websites. Useful 
 rails websites and applications. 
 
 
-How to use:
+How to use: # TODO: Update this with better info
 -----------
 
-Make sure you have a copy of MySQL2 installed, and fire up your rails server. Once up and running create an account
-(this is just stored in the database).
+Get your deployment server up and running (this app is ready for production from the get go). 
+
+Make sure you have a copy of MySQL2 installed, and fire up apache/passenger. Get your Ruby 2.0.0 & Rails 4 installed.
+
+Create your Database tables by running rake db:create, rake db:migrate, and bundle install in your project folder.
+
+Once up and running create an account (this is just stored in the database).
 
 Once signed up and signed in, add a new site by clicking the 'new site' button in the left hand corner.
 
