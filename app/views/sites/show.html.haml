@@ -29,7 +29,8 @@
 
   = radio_button_tag 'time', "31556926"
   Past year
-
+.pull-left 
+  Response time in seconds
 #chart_container
   #x_axis
   #y_axis
@@ -123,7 +124,11 @@
             get_requests($(this).val());
           });
         });
+.center-text
+  Time period in minutes/hours/days
+
 .pull-right
   #average
+
 
 = render :template => 'requests/list'
